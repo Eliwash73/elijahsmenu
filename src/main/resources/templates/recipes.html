@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Recipes</title>
+  </head>
+  <body>
+    <h1>All Recipes</h1>
+
+    <ul>
+      <li th:each="recipe : ${recipes}">
+        <a
+          th:href="@{'/recipes/' + ${recipe.slug}}"
+          th:text="${recipe.title}"
+        ></a>
+      </li>
+    </ul>
+
+    <a href="/">Back to Home</a> <br />
+    <a href="/recipes/new">add a new recipe</a>
+  </body>
+</html>

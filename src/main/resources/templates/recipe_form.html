@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add a New Recipe</title>
+  </head>
+  <body>
+    <h1>Add a New Recipe</h1>
+    <form action="/recipes/new" method="post">
+      <div>
+        <label for="title">Recipe Title:</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+      <div>
+        <label for="ingredients"
+          >Ingredients: (seperate ingredients by a comma)</label
+        ><br />
+        <textarea
+          id="ingredients"
+          name="ingredients"
+          rows="5"
+          cols="30"
+          placeholder="e.g.\n2 eggs\n1 cup milk\n2 cups flour"
+          required
+        ></textarea>
+      </div>
+      <div>
+        <label for="directions"
+          >Directions: (sepetate each direction with a period)</label
+        ><br />
+        <textarea
+          id="directions"
+          name="directions"
+          rows="5"
+          cols="30"
+          placeholder="e.g.\nBeat eggs\nAdd milk\nMix in flour\nCook on pan"
+          required
+        ></textarea>
+      </div>
+      <div>
+        <button type="submit">Add Recipe</button>
+      </div>
+    </form>
+  </body>
+</html>

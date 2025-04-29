@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="${recipe.title}">Recipe Detail</title>
+    <style>
+      /* Style to strike through the label when checkbox is checked */
+      .ingredient-item input[type="checkbox"]:checked + span {
+        text-decoration: line-through;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 th:text="${recipe.title}">Recipe Title</h1>
+
+    <h2>Ingredients</h2>
+    <ul>
+      <li
+        class="ingredient-item"
+        th:each="ingredient : ${#strings.arraySplit(recipe.ingredients, ',')}"
+      >
+        <label>
+          <input type="checkbox" />
+          <span th:text="${ingredient}">Ingredient</span>
+        </label>
+      </li>
+    </ul>
+
+    <h2>Directions</h2>
+    <ol>
+      <li
+        th:each="direction : ${#strings.arraySplit(recipe.directions, '.')}"
+        th:text="${direction}"
+      >
+        Step
+      </li>
+    </ol>
+
+    <a href="/recipes">Back to Recipes</a>
+  </body>
+</html>
