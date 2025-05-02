@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8" />
     <title>Add a New Recipe</title>
+    <!-- <button id="toggle-dark-mode">🌙 Toggle Dark Mode</button> -->
   </head>
   <body>
+    <div th:replace="~{fragments/header :: header}"></div>
     <h1>Add a New Recipe</h1>
+    <br />
     <form action="/recipes/new" method="post">
       <div>
         <label for="title">Recipe Title:</label>
@@ -17,9 +22,9 @@
         <textarea
           id="ingredients"
           name="ingredients"
-          rows="5"
-          cols="30"
-          placeholder="e.g.\n2 eggs\n1 cup milk\n2 cups flour"
+          rows="15"
+          cols="60"
+          placeholder="e.g. 2 eggs, 1 cup milk, 2 cups flour"
           required
         ></textarea>
       </div>
@@ -30,9 +35,9 @@
         <textarea
           id="directions"
           name="directions"
-          rows="5"
-          cols="30"
-          placeholder="e.g.\nBeat eggs\nAdd milk\nMix in flour\nCook on pan"
+          rows="15"
+          cols="60"
+          placeholder="e.g. Beat eggs. Add milk. Mix in flour. Cook on pan"
           required
         ></textarea>
       </div>
@@ -40,5 +45,6 @@
         <button type="submit">Add Recipe</button>
       </div>
     </form>
+    <script src="/js/recipe.js"></script>
   </body>
 </html>

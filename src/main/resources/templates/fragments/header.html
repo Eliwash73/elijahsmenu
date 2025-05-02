@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div th:fragment="header">
+      <header>
+        <div>
+          <a
+            href="/"
+            style="text-decoration: none; font-weight: bold; font-size: 1.5rem"
+            >Elijah's Menu</a
+          >
+        </div>
+        <nav style="display: flex; gap: 1rem">
+          <a href="/recipes">Recipes</a>
+          <a href="/recipes/new">Add New</a>
+          <!-- <button id="toggle-dark-mode">🌙</button> -->
+        </nav>
+      </header>
+    </div>
+  </body>
+</html>
