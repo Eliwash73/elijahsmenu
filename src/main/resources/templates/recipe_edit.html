@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Recipe</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div class="container">
+      <main>
+        <h1>Edit Recipe</h1>
+        <form
+          th:action="@{/recipes/edit/{slug}(slug=${recipe.slug})}"
+          th:object="${recipe}"
+          method="post"
+        >
+          <input type="hidden" th:field="*{slug}" />
+          <input type="hidden" name="_method" />
+
+          <label for="title">Title:</label><br />
+          <input
+            type="text"
+            id="title"
+            th:field="*{title}"
+            required
+          /><br /><br />
+
+          <label for="ingredients">Ingredients (comma-separated):</label><br />
+          <textarea
+            id="ingredients"
+            th:field="*{ingredients}"
+            rows="5"
+          ></textarea
+          ><br /><br />
+
+          <label for="directions">Directions (period-separated):</label><br />
+          <textarea id="directions" th:field="*{directions}" rows="7"></textarea
+          ><br /><br />
+
+          <button type="submit">Update Recipe</button>
+        </form>
+      </main>
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+  </body>
+</html>

@@ -42,5 +42,18 @@ public class RecipeService {
                     .replaceAll("^-|-$", "");
     }
     
+    public void deleteRecipe(Long id) {
+        recipeRepository.deleteById(id);
+    }
+
+    public Recipe updateRecipe(Recipe recipe) {
+        Recipe existingRecipe = recipeRepository.findBySlug(recipe.getSlug());
+        existingRecipe.setTitle(recipe.getTitle());
+        existingRecipe.setRecipeLink(recipe.getRecipeLink());
+        existingRecipe.setIngredients(recipe.getIngredients());
+        existingRecipe.setDirections(recipe.getDirections());
+        return recipeRepository.save(existingRecipe);
+    }
+    
 
 }

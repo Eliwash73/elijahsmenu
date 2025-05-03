@@ -8,19 +8,22 @@
   </head>
   <body>
     <div id="hdr" th:replace="~{fragments/header :: header}"></div>
-    <h1>All Recipes</h1>
 
-    <ul>
-      <li th:each="recipe : ${recipes}">
-        <a
-          th:href="@{'/recipes/' + ${recipe.slug}}"
-          th:text="${recipe.title}"
-        ></a>
-      </li>
-    </ul>
+    <div class="container">
+      <main>
+        <h1>All Recipes</h1>
 
-    <a href="/">Back to Home</a> <br />
-    <a href="/recipes/new">add a new recipe</a>
+        <ul>
+          <li th:each="recipe : ${recipes}">
+            <a
+              th:href="@{'/recipes/' + ${recipe.slug}}"
+              th:text="${recipe.title}"
+            ></a>
+          </li>
+        </ul>
+      </main>
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
     <script src="/js/recipe.js"></script>
   </body>
 </html>

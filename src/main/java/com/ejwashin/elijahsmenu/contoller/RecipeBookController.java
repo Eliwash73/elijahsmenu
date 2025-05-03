@@ -42,10 +42,22 @@ public class RecipeBookController {
     public String showRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
         return "recipe_form"; // this looks for a template called recipe_form.html
+    }   
+    @GetMapping("/recipes/newmd")
+    public String showRecipeMarkdownForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "recipe_form_markdown"; // this looks for a template called recipe_form.html
     }
 
     @PostMapping("/recipes/new")
     public String addRecipe(@ModelAttribute Recipe recipe) {
+        String slug = recipeService.generateSlug(recipe.getTitle());
+        recipe.setSlug(slug);
+        recipeService.addRecipe(recipe);
+        return "redirect:/recipes";
+    }
+    @PostMapping("/recipes/newmd")
+    public String addRecipeMarkdown(@ModelAttribute Recipe recipe) {
         String slug = recipeService.generateSlug(recipe.getTitle());
         recipe.setSlug(slug);
         recipeService.addRecipe(recipe);
@@ -64,6 +76,22 @@ public class RecipeBookController {
         }
     }
     
-    
+    @GetMapping("/recipes/edit/{slug}")
+    public String showEditRecipeForm(@PathVariable String slug, Model model) {
+        Recipe recipe = recipeService.getRecipeBySlug(slug);
+        if (recipe != null) {
+            model.addAttribute("recipe", recipe);
+            return "recipe_edit"; // this looks for a template called recipe_edit.html
+        } else {
+            return "redirect:/recipes"; // Redirect to the recipes page if not found
+        }
+    }
+
+    @PostMapping("/recipes/edit/{slug}")
+    public String updateRecipe(@PathVariable String slug, @ModelAttribute Recipe recipe) {
+        recipe.setSlug(slug); // Set the slug to the existing one
+        recipeService.updateRecipe(recipe);
+        return "redirect:/recipes/" + slug; // Redirect to the updated recipe detail page
+    }
         
 }

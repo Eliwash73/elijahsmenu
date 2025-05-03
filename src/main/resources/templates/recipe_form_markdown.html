@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <meta charset="UTF-8" />
     <title>Add a New Recipe</title>
+    <!-- <button id="toggle-dark-mode">🌙 Toggle Dark Mode</button> -->
   </head>
   <body>
     <div th:replace="~{fragments/header :: header}"></div>
@@ -11,25 +12,23 @@
       <main>
         <h1>Add a New Recipe</h1>
         <br />
-        <form action="/recipes/new" method="post">
+        <form action="/recipes/newmd" method="post">
           <div>
             <label for="title">Recipe Title:</label>
             <input type="text" id="title" name="title" required />
           </div>
           <div>
-            <label for="recipeLink">Recipe Link: (optional)</label><br />
+            <label for="recipe-link">Recipe Link</label><br />
             <textarea
-              id="recipeLink"
-              name="recipeLink"
+              id="recipe-link"
+              name="recipe-link"
               rows="1"
               cols="60"
               placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             ></textarea>
           </div>
           <div>
-            <label for="ingredients"
-              >Ingredients: (seperate ingredients by a comma)</label
-            ><br />
+            <label for="ingredients">Ingredients</label><br />
             <textarea
               id="ingredients"
               name="ingredients"
@@ -40,26 +39,15 @@
             ></textarea>
           </div>
           <div>
-            <label for="directions"
-              >Directions: (sepetate each direction with a period)</label
-            ><br />
-            <textarea
-              id="directions"
-              name="directions"
-              rows="15"
-              cols="60"
-              placeholder="e.g. Beat eggs. Add milk. Mix in flour. Cook on pan"
-              required
-            ></textarea>
-          </div>
-          <div>
             <button type="submit">Add Recipe</button>
           </div>
         </form>
       </main>
       <div th:replace="~{fragments/footer :: footer}"></div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.4/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmlescape@1.0.0/dist/htmlescape.min.js"></script>
     <script src="/js/recipe.js"></script>
   </body>
 </html>

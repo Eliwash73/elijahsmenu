@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <link rel="stylesheet" href="/css/style.css" />
     <meta charset="UTF-8" />
     <title th:text="${recipe.title}">Recipe Detail</title>
-    <!-- <button id="toggle-dark-mode">🌙 Toggle Dark Mode</button> -->
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <div th:replace="~{fragments/header :: header}"></div>
-    <h1 th:text="${recipe.title}">Recipe Title</h1>
+    <div class="container">
+      <main>
+        <h1 th:text="${recipe.title}">Recipe Title</h1>
+        <div
+          th:if="${recipe.recipeLink != null and !#strings.isEmpty(recipe.recipeLink)}"
+        >
+          <h3>Link to Recipe</h3>
+          <a
+            th:href="${recipe.recipeLink}"
+            target="_blank"
+            th:text="${recipe.recipeLink}"
+            >Recipe Link</a
+          >
+        </div>
 
-    <h2>Ingredients</h2>
-    <ul>
-      <li
-        class="ingredient-item"
-        th:each="ingredient : ${#strings.arraySplit(recipe.ingredients, ',')}"
-      >
-        <label>
-          <input type="checkbox" />
-          <span th:text="${ingredient}">Ingredient</span>
-        </label>
-      </li>
-    </ul>
+        <h2>Ingredients</h2>
+        <ul class="ingredients-list">
+          <li
+            class="ingredient-item"
+            th:each="ingredient : ${#strings.arraySplit(recipe.ingredients, ',')}"
+          >
+            <label>
+              <input type="checkbox" />
+              <span th:text="${ingredient}">Ingredient</span>
+            </label>
+          </li>
+        </ul>
 
-    <h2>Directions</h2>
-    <ol>
-      <li
-        th:each="direction : ${#strings.arraySplit(recipe.directions, '.')}"
-        th:text="${direction}"
-      >
-        Step
-      </li>
-    </ol>
-
-    <a href="/recipes">Back to Recipes</a>
+        <h2>Directions</h2>
+        <ol class="directions-list">
+          <li
+            th:each="direction : ${#strings.arraySplit(recipe.directions, '.')}"
+            th:text="${direction}"
+          >
+            Step
+          </li>
+        </ol>
+        <button>
+          <a
+            class="edit-button"
+            th:href="@{/recipes/edit/{id}(id=${recipe.slug})}"
+            >Edit Recipe</a
+          >
+        </button>
+        <!-- <a href="/recipes">Back to Recipes</a> -->
+      </main>
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
     <script src="/js/recipe.js"></script>
   </body>
 </html>
